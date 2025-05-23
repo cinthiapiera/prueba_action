@@ -1,10 +1,10 @@
-name: Hola Mundo
+#name: Hola Mundo
 
-on: [push]
+#on: [push]
 
-jobs:
-  hola:
-    runs-on: ubuntu-latest
+#jobs:
+  #hola:
+    #runs-on: ubuntu-latest
 
     steps:
     - name: Hola Mundo
@@ -19,7 +19,7 @@ jobs:
     - name: cat file
       run: cat hola.txt
   
-  other:
+  #other:
     runs-on: ubuntu-latest
     needs: hola
     steps:
