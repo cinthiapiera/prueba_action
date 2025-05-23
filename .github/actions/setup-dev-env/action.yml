@@ -1,0 +1,17 @@
+name: 'Setup Dev Environment'
+description: 'Prepara el entorno de desarrollo para el proyecto'
+inputs:
+  message:
+    description: 'Mensaje personalizado'
+    required: false
+    default: 'Entorno listo'
+runs:
+  using: 'composite'
+  steps:
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+
+    - name: Ejecutar script de setup
+      run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+      shell: bash
