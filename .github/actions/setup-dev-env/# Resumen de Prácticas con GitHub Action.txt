@@ -1,0 +1,189 @@
+# Resumen de Prácticas con GitHub Actions
+
+## 1. Fundamentos de YAML y GitHub Actions
+
+- Los archivos YAML permiten definir workflows de automatización en `.github/workflows/`.
+- Ejemplo básico de workflow:
+
+    ```yaml
+    name: Hola Mundo
+
+    on: 
+      push:
+
+    jobs:
+      saludo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Mostrar mensaje
+            run: echo "Hola Mundo"
+    ```
+
+## 2. Subir archivos y ramas en Git
+
+Pasos para subir un workflow a GitHub:
+
+```bash
+git init
+git add -A
+git commit -m "Agrega workflow Hola Mundo"
+git branch -m master main  # Opcional, para usar 'main' como rama principal
+git remote add origin https://github.com/usuario/repositorio.git
+git push -u origin main
+```
+
+## 3. Eventos en GitHub Actions
+
+- Puedes disparar workflows con diferentes eventos:
+
+    ```yaml
+    on: 
+      push:
+        branches:
+          - main
+      pull_request:
+        branches:
+          - main
+    ```
+
+- Esto permite ejecutar el workflow solo en `push` o `pull_request` a la rama `main`.
+
+## 4. Uso de Actions del Marketplace
+
+- Ejemplo usando `actions/checkout` para acceder al código fuente:
+
+    ```yaml
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+    ```
+
+## 5. Instalación de paquetes con scripts
+
+- Puedes crear un archivo `script.sh` para instalar paquetes y ejecutarlo desde el workflow:
+
+    ```bash
+    # script.sh
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y curl git
+    ```
+
+    ```yaml
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar script de instalación
+        run: bash script.sh
+    ```
+
+## 6. Actions reutilizables
+
+- Estructura recomendada:
+
+    ```
+    .github/
+      actions/
+        setup-dev-env/
+          action.yml
+          setup.sh
+    ```
+
+- Ejemplo de `action.yml` con parámetros:
+
+    ```yaml
+    name: 'Setup Dev Environment'
+    description: 'Prepara el entorno de desarrollo para el proyecto'
+    inputs:
+      message:
+        description: 'Mensaje personalizado'
+        required: false
+        default: 'Entorno listo'
+    runs:
+      using: 'composite'
+      steps:
+        - name: Dar permisos de ejecución al script
+          run: chmod +x ${{ github.action_path }}/setup.sh
+          shell: bash
+
+        - name: Ejecutar script de setup
+          run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+          shell: bash
+    ```
+
+- Ejemplo de `setup.sh`:
+
+    ```bash
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y nodejs npm
+    npm install
+    echo "$1"
+    ```
+
+- Uso en el workflow:
+
+    ```yaml
+    steps:
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+    ```
+
+## 7. Variables y secretos
+
+- Variables de entorno a nivel de job y step:
+
+    ```yaml
+    jobs:
+      test-build:
+        runs-on: ubuntu-latest
+        env:
+          MI_VARIABLE: "Valor visible desde YAML"
+        steps:
+          - name: Mostrar variable de entorno
+            run: echo "La variable es $MI_VARIABLE"
+    ```
+
+- Uso de secretos (deben crearse en GitHub):
+
+    ```yaml
+    steps:
+      - name: Mostrar secreto
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+    ```
+
+- Variables y secretos en steps:
+
+    ```yaml
+    - name: Usar secreto como variable de entorno en step
+      env:
+        SECRETO_STEP: ${{ secrets.MI_SECRETO }}
+      run: echo "El secreto como variable de entorno es $SECRETO_STEP"
+    ```
+
+## 8. Estrategia de matriz (matrix)
+
+- Permite ejecutar el mismo job con diferentes versiones de una dependencia:
+
+    ```yaml
+    jobs:
+      test-build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [16, 18, 20]
+        steps:
+          - name: Setup Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v4
+            with:
+              node-version: ${{ matrix.node-version }}
+          - name: Verificar Node
+            run: node -v
+    ```
+
+---
+
+**¡Con este resumen tienes una guía completa para repasar y practicar todo lo aprendido sobre GitHub Actions y YAML!**

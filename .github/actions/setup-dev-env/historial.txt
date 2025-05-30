@@ -1,0 +1,2000 @@
+cinthiapiera: como estamos estudando github action  desde los fundamentos estamos aprendiendo sobre los yaml el lengujae de marcado que me ayuda en congifuraciones previas, cual seri aun ejemplo basico si estoy iniciano de cero
+
+GitHub Copilot: ¡Claro! Aquí tienes un ejemplo básico de un archivo YAML para una GitHub Action que se ejecuta cuando haces un push al repositorio y simplemente imprime "Hola Mundo" en la consola:
+
+````yaml
+name: Hola Mundo
+
+on: 
+  push:
+
+jobs:
+  saludo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar mensaje
+        run: echo "Hola Mundo"
+````
+
+**Explicación rápida:**
+- `name`: Nombre del workflow.
+- `on`: Evento que dispara la acción (aquí, cada vez que haces push).
+- `jobs`: Tareas que se ejecutan.
+- `runs-on`: El sistema operativo donde corre la acción.
+- `steps`: Pasos a ejecutar (en este caso, solo imprime un mensaje).
+
+Este archivo debes guardarlo en la carpeta `.github/workflows` de tu repositorio.
+
+cinthiapiera: ahora necesito subirlo a mi github
+
+GitHub: Para subir este archivo a tu repositorio de GitHub, sigue estos pasos:
+
+1. Guarda el archivo:
+   - Guarda el contenido en un archivo llamado por ejemplo .github/workflows/hola-mundo.yml dentro de tu proyecto local.
+
+2. Inicializa git (si no lo has hecho):
+   ```bash
+   git init
+   ```
+
+3. Agrega el archivo al control de versiones:
+   ```bash
+   git add .github/workflows/hola-mundo.yml
+   ```
+
+4. Haz un commit:
+   ```bash
+   git commit -m "Agrega workflow Hola Mundo"
+   ```
+
+5. Crea un repositorio en GitHub (si todavía no lo tienes).
+
+6. Vincula tu repositorio local con el de GitHub:
+   ```bash
+   git remote add origin https://github.com/tu-usuario/tu-repo.git
+   ```
+
+7. Sube los cambios:
+   ```bash
+   git push -u origin main
+   ```
+   Nota: Si tu rama principal se llama master, reemplaza main por master.
+
+¿Necesitas ayuda con alguno de estos pasos o ya tienes el repositorio creado?
+
+cinthiapiera: el profe tiene esto , es porque el lo ejecuta desde una mac o lo tengo que hacer igual
+
+GitHub Copilot: ¡Buena pregunta! El profesor está usando una Mac, pero los comandos de Git que ves en la terminal funcionan igual en Windows, Mac o Linux.  
+La única diferencia es que él usa la terminal de Mac (zsh), y tú usarás la terminal de Windows (puede ser CMD, PowerShell o la terminal integrada de VS Code).
+
+**Pasos para ti en Windows:**
+1. Abre la terminal en VS Code o usa PowerShell/CMD.
+2. Ejecuta los mismos comandos:
+   ```bash
+   git init
+   git add .
+   git commit -m "Init"
+   ```
+
+**Nota:**  
+- El comando `clear` en Mac limpia la pantalla; en Windows puedes usar `cls` para lo mismo, pero no es obligatorio.
+- El resto de los comandos son iguales.
+
+¡Puedes seguir los mismos pasos sin problema!
+
+cinthiapiera: consulta simepre me ha aparecido master en mi terminal pero en github me aparce main , como hago es cambio es decir solo coloc git push -u origin main y se cambia el noombre de la rama 
+
+GitHub Copilot: No, solo con `git push -u origin main` **no cambias el nombre de la rama local**.  
+Si tu rama local se llama `master` y en GitHub tienes `main`, debes renombrar tu rama local a `main` antes de hacer el push.
+
+Aquí tienes los pasos para cambiar el nombre de la rama local de `master` a `main`:
+
+```bash
+git branch -m master main
+git push -u origin main
+```
+
+Luego, si ya existe la rama `main` en GitHub y quieres eliminar `master` del remoto (opcional):
+
+```bash
+git push origin --delete master
+```
+
+**Resumen:**  
+- `git branch -m master main` cambia el nombre de la rama local.
+- `git push -u origin main` sube la nueva rama y la establece como principal.
+
+¡Listo! Ahora tu rama local y la de GitHub se llamarán `main`.
+
+cinthiapiera: esto es lo que escribi : git init
+git add -A
+git commit -m "Agrega workflow Hola Mundo" y cooque el remoto sin cambiar la rama de master a main sucede algo si no cambie el nmbre de mi rama antes
+
+GitHub Copilot: No sucede nada grave si no cambiaste el nombre de la rama de `master` a `main`.  
+Simplemente, tu rama principal en GitHub será `master` en vez de `main`.
+
+**¿Qué implica esto?**
+- El workflow YAML funcionará igual, sin importar el nombre de la rama.
+- Solo verás `master` como rama principal en tu repositorio de GitHub.
+- Si quieres que se llame `main` (por convención actual), puedes cambiarlo después.
+
+**¿Cómo cambiarlo después?**  
+Si quieres cambiar el nombre ahora, ejecuta estos comandos:
+
+```bash
+git branch -m master main
+git push -u origin main
+git push origin --delete master
+```
+
+Esto actualizará tu rama principal a `main` en GitHub.
+
+**En resumen:**  
+No hay problema si usaste `master`. El workflow funcionará igual. Cambia el nombre solo si quieres seguir la convención moderna.
+
+cinthiapiera: aqui el orden origianl de las instrucciones: esto es lo que escribi : git init
+git add -A
+git commit -m "Agrega workflow Hola Mundo" git remote add origin https://github.com/cinthiapiera/prueba_action.git
+
+GitHub Copilot: ¡Perfecto! El orden de tus instrucciones es correcto para inicializar un repositorio, agregar archivos, hacer commit y conectar con el remoto.  
+Solo te falta el paso final para subir tus archivos a GitHub:
+
+```bash
+git push -u origin master
+```
+
+O si tu rama principal es `main` (después de renombrarla):
+
+```bash
+git push -u origin main
+```
+
+**Resumen de tus pasos:**
+1. `git init`  
+2. `git add -A`  
+3. `git commit -m "Agrega workflow Hola Mundo"`  
+4. `git remote add origin https://github.com/cinthiapiera/prueba_action.git`  
+5. `git push -u origin master` (o `main` si cambiaste el nombre de la rama)
+
+¡Con esto tu workflow YAML estará en GitHub y listo para ejecutarse cuando hagas un push!
+
+cinthiapiera: por eso te decia puedo cambiar el nombre com osugeriste de master a main , antes del push
+
+GitHub Copilot: ¡Exactamente!  
+Puedes cambiar el nombre de la rama de `master` a `main` **antes** de hacer el primer `git push`. Así tu rama principal en GitHub será `main`, que es la convención actual.
+
+Solo ejecuta esto antes del push:
+
+```bash
+git branch -m master main
+```
+
+Luego sube la rama:
+
+```bash
+git push -u origin main
+```
+
+¡Listo! Así tu repositorio tendrá la rama principal llamada `main` desde el inicio.
+
+cinthiapiera: genial, ya se subio y estaba en pendiente al darle clic se abrio un ventana con la ejecucion de hola mundo
+
+GitHub Copilot: ¡Excelente! Eso significa que tu workflow YAML está funcionando correctamente y GitHub Actions ejecutó el flujo como esperabas.  
+Ver el mensaje "Hola Mundo" en la ejecución confirma que todo está bien configurado.
+
+¡Felicidades por lograrlo! Si quieres probar más acciones o automatizaciones, solo edita tu archivo YAML y haz un nuevo push para ver los cambios en acción. ¿Te gustaría probar algo más?
+
+cinthiapiera: estoy adjuntando otra tarea:   other:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: LS
+      run: ls -al, al realizar el push ejecuto el -u o solo git push
+
+GitHub Copilot: Si ya usaste antes `git push -u origin main` (o `master`), **ya no necesitas el `-u`**.  
+Ahora solo usa:
+
+```bash
+git push
+```
+
+Esto subirá tus nuevos cambios al repositorio remoto y ejecutará de nuevo el workflow en GitHub Actions.
+
+cinthiapiera: adjunte un needs indicando que se ejecute uno secuencial de otro, como un adepencia de cada tarea. reisa el archivo y te dara cuenta al subirlo no se ejecuto al isntante sino espero la ejecucion de la primera
+
+GitHub Copilot: ¡Correcto!  
+Has usado correctamente la palabra clave `needs` en tu workflow YAML:
+
+```yaml
+other:
+  runs-on: ubuntu-latest
+  needs: hola
+  steps:
+    - name: LS
+      run: ls -al
+```
+
+Esto indica que el job `other` **depende** de que termine el job `hola` antes de ejecutarse.  
+Por eso, al hacer el push, viste que primero se ejecutó `hola` y solo cuando terminó, comenzó `other`.
+
+Así se definen dependencias y ejecuciones secuenciales entre jobs en GitHub Actions.  
+¡Muy bien aplicado el concepto!
+
+cinthiapiera: segun lo que estamos practicando puedes hacer un resumen para leerlo y practiacrlo nuevamente
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un **resumen práctico** de lo que has aprendido y aplicado con GitHub Actions y YAML:
+
+---
+
+### Resumen de práctica con GitHub Actions y YAML
+
+1. **¿Qué es GitHub Actions?**  
+   Es una herramienta de automatización que permite ejecutar tareas automáticamente en tu repositorio de GitHub, como pruebas, despliegues o scripts personalizados.
+
+2. **¿Qué es un archivo YAML en este contexto?**  
+   Es un archivo de configuración (ubicado en workflows) donde defines los pasos y condiciones de tus automatizaciones.
+
+3. **Estructura básica de un workflow:**
+   ```yaml
+   name: Nombre del workflow
+
+   on: [evento]  # Por ejemplo: push
+
+   jobs:
+     nombre_job:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Descripción del paso
+           run: comando_a_ejecutar
+   ```
+
+4. **Ejemplo aplicado:**
+   - Definiste dos jobs: `hola` y `other`.
+   - El job `hola` crea un archivo, escribe texto y lo muestra.
+   - El job `other` depende de que termine `hola` (usando `needs: hola`) y luego lista los archivos.
+
+   ```yaml
+   jobs:
+     hola:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Hola Mundo
+           run: echo "Hola Mundo"
+         - name: touch file
+           run: touch hola.txt
+         - name: Set text
+           run: echo "Hola Mundo" > hola.txt
+         - name: cat file
+           run: cat hola.txt
+
+     other:
+       runs-on: ubuntu-latest
+       needs: hola
+       steps:
+         - name: LS
+           run: ls -al
+   ```
+
+5. **Comandos básicos de Git para subir tu workflow:**
+   ```bash
+   git init
+   git add -A
+   git commit -m "Agrega workflow Hola Mundo"
+   git branch -m master main      # (opcional, para usar 'main' como rama principal)
+   git remote add origin https://github.com/usuario/repositorio.git
+   git push -u origin main
+   ```
+
+6. **¿Qué aprendiste?**
+   - Crear y editar archivos YAML para workflows.
+   - Definir jobs y pasos.
+   - Usar dependencias entre jobs con `needs`.
+   - Subir y ejecutar workflows en GitHub Actions.
+
+---
+
+Puedes practicar creando nuevos workflows, agregando más pasos o jobs, y observando cómo se ejecutan en GitHub.  
+¡Sigue experimentando y automatizando!
+
+cinthiapiera: seguimos me piden generarun pull request en una nueva rama , generar un archivo file y dar push
+
+GitHub Copilot: ¡Perfecto! Aquí tienes los pasos para crear una nueva rama, agregar un archivo, hacer un push y luego generar un Pull Request en GitHub:
+
+### 1. Crea una nueva rama (por ejemplo, `feature/file`)
+```bash
+git checkout -b feature/file
+```
+
+### 2. Crea un nuevo archivo (por ejemplo, `file.txt`)
+Puedes hacerlo desde VS Code o con el comando:
+```bash
+echo "Este es un nuevo archivo" > file.txt
+```
+
+### 3. Agrega y haz commit del archivo
+```bash
+git add file.txt
+git commit -m "Agrega file.txt en nueva rama"
+```
+
+### 4. Haz push de la nueva rama al repositorio remoto
+```bash
+git push -u origin feature/file
+```
+
+### 5. Genera el Pull Request
+- Ve a tu repositorio en GitHub.
+- Verás un mensaje para crear un Pull Request desde la rama `feature/file` hacia `main` (o la rama principal).
+- Haz clic en "Compare & pull request" y luego en "Create pull request".
+
+¡Listo! Así cumples con la tarea solicitada. ¿Te ayudo con algún paso en particular?
+
+cinthiapiera: consulta poruqe en la nueva rama se coloca el push origin -u es porque es una nueva isntancia 
+
+GitHub Copilot: ¡Exacto!  
+Cuando creas una **nueva rama** y haces push por primera vez, usas `git push -u origin nombre_rama` para:
+
+- Subir la rama al repositorio remoto (GitHub).
+- Establecer un "tracking" entre tu rama local y la remota, así después solo necesitas usar `git push` o `git pull` sin especificar la rama.
+
+Por ejemplo:
+```bash
+git push -u origin feature/file
+```
+
+En los siguientes pushes desde esa rama, solo necesitas:
+```bash
+git push
+```
+
+Esto solo es necesario la **primera vez** que subes una rama nueva.
+
+cinthiapiera: @workspace /explain  ya lo subi al repo, y genere el pull request, pero volvi al archivo y adjunte el evento pull_request y volvi a subirlo desde la rama nueva y al ver el pull request este se ejecuta . ojo todavia no mercheo . puedes explciarme este ejemplo
+
+Workspace: ¡Claro! Te explico paso a paso lo que ocurre en tu flujo de trabajo de GitHub Actions:
+
+### 1. Definición de eventos en el workflow
+
+En tu archivo YAML tienes:
+
+```yaml
+on: [push, pull_request]
+```
+
+Esto significa que tu workflow se ejecutará automáticamente cuando ocurra **cualquiera** de estos dos eventos en el repositorio:
+
+- `push`: Cuando haces un push (subes cambios) a cualquier rama.
+- `pull_request`: Cuando se crea o actualiza un pull request.
+
+---
+
+### 2. ¿Qué pasó en tu caso?
+
+- **Subiste el archivo al repo**: Esto disparó el evento `push` y ejecutó el workflow.
+- **Creaste un pull request**: Esto disparó el evento `pull_request` y ejecutó el workflow.
+- **Editaste el archivo y subiste cambios desde la rama del PR**: Cada vez que haces un nuevo push a la rama que está asociada al pull request, se vuelve a ejecutar el workflow por ambos eventos (`push` y `pull_request`).
+
+> **Nota:** El workflow se ejecuta en el contexto del pull request aunque todavía no hayas hecho el merge. Esto es útil para validar los cambios antes de fusionarlos a la rama principal.
+
+---
+
+### 3. ¿Por qué se ejecuta el workflow en el pull request?
+
+GitHub Actions está diseñado para ayudarte a validar los cambios antes de fusionarlos. Por eso, cada vez que actualizas la rama del pull request, el workflow se vuelve a ejecutar para asegurarse de que todo sigue funcionando correctamente.
+
+---
+
+### Resumen
+
+- El workflow se ejecuta en cada push y en cada actualización de un pull request.
+- No es necesario hacer merge para que se ejecute el workflow en el contexto del pull request.
+- Esto te permite detectar errores antes de fusionar los cambios a la rama principal.
+
+¿Te gustaría ver un ejemplo visual del flujo o tienes otra duda sobre este comportamiento?
+
+cinthiapiera: ahora me piden que escriba on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main, para independizar los eventos
+
+GitHub Copilot: ¡Perfecto! Así como lo tienes, ya estás **independizando los eventos** en tu workflow.  
+La forma correcta y recomendada para definir ambos eventos por separado en YAML es así:
+
+````yaml
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+````
+
+Esto indica que el workflow se ejecutará:
+- Cuando hagas un push a la rama `main`.
+- Cuando crees o actualices un pull request que tenga como destino la rama `main`.
+
+**Ventaja:**  
+Puedes personalizar los triggers de cada evento de forma independiente si lo necesitas en el futuro.
+
+¡Ya lo tienes bien configurado!
+
+cinthiapiera: al igual que la prmer resumen realiza lo mismo para la seccion de eventos que estamos estudiando
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un **resumen práctico** sobre la sección de eventos en GitHub Actions, basado en lo que has practicado:
+
+---
+
+## Resumen: Sección de eventos (`on`) en GitHub Actions
+
+### ¿Qué es la sección `on`?
+
+La sección `on` en el archivo YAML de GitHub Actions define **cuándo** se ejecutará tu workflow.  
+Permite especificar uno o varios eventos de GitHub como disparadores.
+
+---
+
+### Ejemplo aplicado
+
+```yaml
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+```
+
+#### ¿Qué significa esto?
+
+- **push:**  
+  El workflow se ejecuta cuando haces un push (subes cambios) a la rama `main`.
+
+- **pull_request:**  
+  El workflow se ejecuta cuando creas o actualizas un pull request que tiene como destino la rama `main`.
+
+---
+
+### Ventajas de definir los eventos por separado
+
+- Puedes controlar exactamente en qué situaciones se ejecuta tu workflow.
+- Permite personalizar los triggers para cada rama o evento.
+- Es más claro y flexible que usar una lista simple (`on: [push, pull_request]`).
+
+---
+
+### ¿Por qué es útil?
+
+- **Validación automática:**  
+  Puedes asegurarte de que los cambios funcionan antes de fusionarlos a la rama principal (`main`).
+- **Automatización continua:**  
+  Cada vez que alguien sube cambios o propone un pull request, el workflow se ejecuta automáticamente.
+
+---
+
+### Resumen visual
+
+| Evento         | ¿Cuándo se ejecuta?                                      |
+|----------------|---------------------------------------------------------|
+| push           | Al hacer push a la rama `main`                          |
+| pull_request   | Al crear/actualizar un PR hacia la rama `main`          |
+
+---
+
+**¡Practica cambiando los eventos y observa cómo responde tu workflow!**  
+Esto es clave para dominar la automatización en GitHub Actions.
+
+cinthiapiera: ahora estamos llendo a las actions , para esto escogimos enel marketplace el checkout y lo implemntaremos en nuestro codigo
+
+GitHub Copilot: ¡Muy bien! El action `actions/checkout` es uno de los más usados y sirve para que tu workflow pueda acceder al código fuente del repositorio.
+
+Aquí tienes cómo implementarlo en tu archivo YAML, agregándolo como el **primer paso** en cada job que necesite acceder a los archivos del repo:
+
+````yaml
+name: Hola Mundo
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  hola:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+
+    - name: Hola Mundo
+      run: echo "Hola Mundo"
+
+    - name: touch file
+      run: touch hola.txt
+
+    - name: Set text
+      run: echo "Hola Mundo" > hola.txt
+
+    - name: cat file
+      run: cat hola.txt
+  
+  other:
+    runs-on: ubuntu-latest
+    needs: hola
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+
+    - name: LS
+      run: ls -al
+````
+
+**Recuerda:**  
+- El paso `uses: actions/checkout@v4` descarga el código del repo en el runner.
+- Es recomendable ponerlo como el primer paso de cada job que necesite acceder a los archivos del repositorio.
+
+cinthiapiera: aqui la muestra de la ejecucion correcta , muestra los elelemntos del rpeositorios es decir os archivos uando se ejecuta el other jobs.
+
+GitHub Copilot: ¡Exacto!  
+La imagen muestra que tu job `other` se ejecutó correctamente y, gracias al paso `Checkout`, pudo listar todos los archivos del repositorio con el comando `ls -al`.  
+Esto confirma que el action `actions/checkout` funciona como esperabas: descarga el código del repo en el runner y permite que los siguientes pasos trabajen con esos archivos.
+
+**Resumen del flujo:**
+- El job `hola` se ejecuta primero.
+- El job `other` espera a que termine `hola` (por `needs: hola`).
+- En `other`, el paso `Checkout` descarga el código.
+- El paso `LS` muestra todos los archivos del repositorio, incluyendo los archivos y carpetas como .github, .git, ejemplo.yaml, file.txt, etc.
+
+¡Muy bien implementado y comprobado! ¿Quieres probar otro action o tienes otra duda?
+
+cinthiapiera: genial , ahora instalaremos paquetes como nuevo ejemplo
+
+GitHub Copilot: ¡Perfecto! Para instalar paquetes en un workflow de GitHub Actions, solo necesitas agregar un paso con el comando de instalación correspondiente según el gestor de paquetes y el lenguaje que uses.
+
+Aquí tienes un ejemplo para instalar paquetes de **Node.js** (usando `npm`) y de **Python** (usando `pip`).  
+Puedes adaptar el ejemplo según lo que necesites.
+
+---
+
+### Ejemplo: Instalar paquetes de Node.js y Python
+
+````yaml
+jobs:
+  hola:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Instalar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Instalar dependencias Node.js
+      run: npm install
+
+    - name: Instalar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Instalar dependencias Python
+      run: pip install requests
+
+    - name: Hola Mundo
+      run: echo "Hola Mundo"
+````
+
+---
+
+**¿Qué hace este ejemplo?**
+- Descarga el código.
+- Instala Node.js y sus dependencias.
+- Instala Python y el paquete `requests`.
+- Muestra "Hola Mundo".
+
+Si quieres instalar paquetes de otro lenguaje, dime cuál y te muestro el ejemplo.
+
+cinthiapiera: consulta, como es un nuevo tema, deberia crear otro archivo yml y cambiar de rama o en la rama de main
+
+GitHub Copilot: ¡Muy buena pregunta!  
+Tienes dos opciones válidas según cómo quieras organizar tu trabajo:
+
+### Opción 1: Crear otro archivo YAML (recomendado para temas distintos)
+- Puedes crear un nuevo archivo en workflows, por ejemplo:  
+  `.github/workflows/instalar_paquetes.yml`
+- Así mantienes separados los ejemplos y puedes activar/desactivar workflows fácilmente.
+- Puedes trabajar en la rama `main` o en una nueva rama si prefieres revisar antes de fusionar.
+
+### Opción 2: Usar el mismo archivo YAML
+- Puedes agregar los nuevos pasos al mismo archivo test_1.yml.
+- Esto es útil si quieres que todo se ejecute junto, pero puede volverse confuso si tienes muchos ejemplos distintos.
+
+### Sobre la rama
+- Si es una práctica o prueba, puedes hacerlo en `main`.
+- Si es para revisión o colaboración, crea una nueva rama, haz los cambios y luego un pull request.
+
+**Recomendación:**  
+Para temas nuevos y prácticas separadas, crea un nuevo archivo YAML.  
+Si quieres experimentar sin afectar el flujo principal, hazlo en una nueva rama.
+
+¿Te gustaría que te ayude a crear el nuevo archivo yml para este ejemplo?
+
+cinthiapiera: pero esta convinado con el workflow anterior , solo quiero que se ejecute este nuevo test
+
+GitHub Copilot: ¡Perfecto! Para que **solo se ejecute este nuevo workflow** (test_2.yml) y no el anterior, asegúrate de que:
+
+1. **Solo hagas push del archivo test_2.yml** (puedes dejar el otro archivo, pero no lo modifiques).
+2. **El evento `on` de ambos workflows esté configurado igual** (por ejemplo, ambos con `on: [push]`), pero solo se ejecutará el workflow cuyo archivo `.yml` esté activo y válido.
+
+**¿Cómo asegurarte de que solo se ejecute este?**
+
+- Si quieres que solo se ejecute test_2.yml y no el anterior, puedes **eliminar o comentar** el archivo anterior (`test_1.yml`), o cambiar el evento `on` en `test_1.yml` a algo que no se dispare (por ejemplo, una rama diferente).
+- Si ambos archivos están activos y tienen el mismo trigger (`on: [push]`), **ambos se ejecutarán** en cada push.
+
+---
+
+### Solución rápida:  
+**Desactiva el anterior cambiando su trigger:**
+
+````yaml
+on:
+  push:
+    branches:
+      - rama-que-no-existe
+````
+
+O simplemente **elimina o renombra** el archivo `test_1.yml` si solo quieres probar el nuevo.
+
+---
+
+Así, al hacer push, **solo se ejecutará el workflow de test_2.yml**.  
+¿Quieres que te ayude a desactivar el anterior o necesitas otro ajuste?
+
+cinthiapiera: claro lo que pasa es que lo de event y action lo inicie en la otra rama feature/file y al volver a main solo esta la version anteiroe de test1  que tiene un push, como inhabilito este yml
+
+GitHub Copilot: Para **inhabilitar** el workflow test_1.yml y que no se ejecute más en la rama `main`, tienes varias opciones sencillas:
+
+---
+
+### Opción 1: Cambia el evento a una rama que no existe
+
+Esto evita que el workflow se dispare:
+
+````yaml
+on:
+  push:
+    branches:
+      - rama-inactiva
+````
+
+---
+
+### Opción 2: Comenta todo el contenido
+
+Agrega `#` al inicio de cada línea para comentar el archivo completo.
+
+---
+
+### Opción 3: Elimina o renombra el archivo
+
+Puedes borrar test_1.yml o cambiarle el nombre (por ejemplo, `test_1.yml.bak`).
+
+---
+
+**Recomendación:**  
+La opción 1 es rápida y reversible.  
+Haz el cambio, guarda y haz un push. Así, solo se ejecutará el workflow que deseas.
+
+¿Te ayudo con el comando para hacer el push después del cambio?
+
+cinthiapiera: como vez comente el test_1.yml y se ejecuta el segundo pero me da un error en el test1
+
+GitHub Copilot: ¡Correcto! Al comentar todo el contenido de test_1.yml, el archivo queda **vacío para GitHub Actions**, pero sigue existiendo en la carpeta de workflows.  
+GitHub Actions intenta leerlo y, al no encontrar una configuración válida, muestra un **error de sintaxis** o de configuración en ese workflow.
+
+### ¿Cómo evitar el error?
+
+Tienes dos opciones recomendadas:
+
+---
+
+#### 1. **Elimina el archivo test_1.yml**
+Si ya no lo necesitas, simplemente bórralo.  
+GitHub Actions ya no intentará ejecutarlo ni mostrará errores.
+
+```bash
+git rm .github/workflows/test_1.yml
+git commit -m "Elimina workflow inactivo test_1.yml"
+git push
+```
+
+---
+
+#### 2. **Renombra el archivo**
+Puedes cambiarle el nombre para que no termine en `.yml` (por ejemplo, `test_1.yml.bak`).  
+Así, GitHub Actions lo ignorará.
+
+```bash
+git mv .github/workflows/test_1.yml .github/workflows/test_1.yml.bak
+git commit -m "Desactiva workflow test_1.yml"
+git push
+```
+
+---
+
+**Conclusión:**  
+Comentar todo el archivo no es suficiente, lo mejor es eliminarlo o renombrarlo para evitar errores en GitHub Actions.
+
+cinthiapiera: o en todo caso no dejarlo en la carpeta de workflow sino sacarlo al inicio
+
+GitHub Copilot: ¡Exactamente!  
+Si **mueves el archivo test_1.yml fuera de la carpeta workflows**, GitHub Actions ya no lo detectará ni intentará ejecutarlo, por lo que no mostrará errores.
+
+### ¿Cómo hacerlo?
+
+1. Mueve el archivo fuera de la carpeta de workflows, por ejemplo al directorio raíz del repositorio:
+   ```bash
+   git mv .github/workflows/test_1.yml ./test_1.yml
+   git commit -m "Mueve test_1.yml fuera de workflows para desactivarlo"
+   git push
+   ```
+
+2. Así, el archivo queda guardado como respaldo, pero **no será ejecutado** por GitHub Actions.
+
+---
+
+**Resumen:**  
+- Solo los archivos `.yml` dentro de workflows son ejecutados por GitHub Actions.
+- Moverlos fuera de esa carpeta es una forma segura de desactivarlos sin borrarlos.
+
+cinthiapiera: listo, ahora ya podemos ir con el tema de isntalcion de pauqetes usaremos el checkout pero me dicen que tenga un script.sh donde coloque la ocnfiguracion de la instlacion 
+
+GitHub Copilot: ¡Perfecto! Aquí tienes los pasos para cumplir con el nuevo requerimiento:
+
+1. **Crea un archivo `script.sh`** en la raíz de tu repositorio con el contenido de instalación que necesites. Por ejemplo, para instalar `curl` y `git` en Ubuntu:
+
+```bash
+#!/bin/bash
+echo "Instalando paquetes..."
+sudo apt-get update
+sudo apt-get install -y curl git
+echo "Instalación completada."
+```
+
+2. **Haz tu workflow usando `actions/checkout` y ejecuta el script**:
+
+````yaml
+name: Test
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+
+    - name: Ejecutar script de instalación
+      run: bash script.sh
+
+    - name: ls
+      run: |
+        echo "hola mundo" >> hola.txt
+        cat hola.txt
+````
+
+3. **No olvides dar permisos de ejecución al script** (opcional, pero recomendable):
+
+```bash
+chmod +x script.sh
+```
+
+Puedes agregar este paso en el workflow si lo deseas:
+
+```yaml
+    - name: Dar permisos de ejecución
+      run: chmod +x script.sh
+```
+
+---
+
+Con esto, tu workflow usará `checkout` para descargar el código y luego ejecutará el script de instalación de paquetes. ¿Te gustaría un ejemplo para otro lenguaje o gestor de paquetes?
+
+cinthiapiera: genial, si se ejecuto y lo vi en las actions 
+
+GitHub Copilot: ¡Excelente!  
+Eso significa que tu workflow está correctamente configurado: descargó el código con `checkout`, dio permisos y ejecutó tu script.sh para instalar los paquetes.  
+¡Muy bien hecho!  
+Ahora puedes modificar el script para instalar cualquier otro paquete o realizar configuraciones adicionales según lo que necesites practicar.  
+¿Quieres probar con otro gestor de paquetes o lenguaje? ¿O tienes otra duda sobre workflows?
+
+cinthiapiera: realiza el resumen de esta secion de instalcion de paquetes
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un **resumen práctico** de la sección de instalación de paquetes usando GitHub Actions y un script:
+
+---
+
+## Resumen: Instalación de paquetes con GitHub Actions y script.sh
+
+1. **Objetivo:**  
+   Automatizar la instalación de paquetes en el runner de GitHub Actions usando un script personalizado.
+
+2. **Estructura del workflow:**
+   - Se usa el evento `push` para ejecutar el workflow en cada push al repositorio.
+   - Se utiliza el action `actions/checkout` para descargar el código del repositorio.
+   - Se da permiso de ejecución al archivo script.sh y luego se ejecuta.
+
+3. **Ejemplo de workflow:**
+
+   ```yaml
+   name: Test
+
+   on: [push]
+
+   jobs:
+     test-build:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout código
+           uses: actions/checkout@v4
+
+         - name: Dar permisos de ejecución y ejecutar script
+           run: |
+             chmod +x script.sh
+             ./script.sh
+   ```
+
+4. **Ejemplo de script.sh:**
+
+   ```bash
+   #!/bin/bash
+   echo "Instalando paquetes..."
+   sudo apt-get update
+   sudo apt-get install -y curl git
+   echo "Instalación completada."
+   ```
+
+5. **Ventajas de este enfoque:**
+   - Permite personalizar fácilmente la instalación de cualquier paquete o dependencia.
+   - El script puede crecer y adaptarse a nuevas necesidades.
+   - Mantiene el workflow limpio y organizado.
+
+---
+
+**Conclusión:**  
+Usar un script de instalación junto con GitHub Actions es una forma flexible y profesional de preparar el entorno de tus automatizaciones.
+
+cinthiapiera: hice un ejercico, istalando node , saber su version y el uso de with para la ultima version
+
+GitHub Copilot: ¡Muy bien! Aquí tienes un **resumen** de lo que lograste en este ejercicio:
+
+---
+
+## Resumen: Instalación y verificación de Node.js en GitHub Actions
+
+1. **Objetivo:**  
+   Automatizar la instalación de Node.js en el runner de GitHub Actions y verificar su versión.
+
+2. **Pasos clave del workflow:**
+   - Usaste el action `actions/setup-node@v4.4.0` para instalar Node.js.
+   - Utilizaste la opción `with` para especificar la versión (`latest`), asegurando que siempre se instale la versión más reciente.
+   - Verificaste la instalación ejecutando `node -v` para mostrar la versión instalada.
+
+3. **Fragmento relevante del workflow:**
+
+   ```yaml
+   - name: Setup Node.js environment
+     uses: actions/setup-node@v4.4.0
+     with:
+       node-version: latest
+
+   - name: node version
+     run: node -v
+   ```
+
+4. **¿Qué aprendiste?**
+   - Cómo instalar Node.js automáticamente en tus workflows.
+   - Cómo usar el bloque `with` para pasar parámetros a un action.
+   - Cómo verificar la instalación de un paquete ejecutando comandos en el runner.
+
+---
+
+¡Este flujo es la base para cualquier proyecto Node.js que quieras automatizar en GitHub Actions!
+
+cinthiapiera: ahora , crearemos action reutilizables, por lo que entiendo hay convenciones de escritura desde crear carpeta action, y subcapetas
+
+GitHub Copilot: ¡Correcto! Para crear **actions reutilizables** en GitHub, se recomienda seguir ciertas convenciones de estructura y organización. Aquí tienes un resumen de las mejores prácticas:
+
+---
+
+## Convenciones para crear actions reutilizables
+
+1. **Carpeta principal:**  
+   Crea una carpeta llamada `action` o `actions` en la raíz de tu repositorio.
+
+2. **Subcarpetas por action:**  
+   Dentro de `action` o `actions`, crea una subcarpeta para cada action reutilizable. Ejemplo:  
+   ```
+   actions/mi-action/
+   ```
+
+3. **Archivo principal:**  
+   Dentro de cada subcarpeta, crea un archivo `action.yml` (o `action.yaml`).  
+   Este archivo define la metadata y el comportamiento de la action.
+
+4. **Archivos de soporte:**  
+   Si tu action necesita scripts (por ejemplo, `entrypoint.sh`, `index.js`, etc.), colócalos en la misma subcarpeta.
+
+---
+
+### Ejemplo de estructura
+
+```
+actions/
+  mi-action/
+    action.yml
+    script.sh
+  otra-action/
+    action.yml
+    index.js
+```
+
+---
+
+### Ejemplo básico de `action.yml`
+
+```yaml
+name: 'Mi Action'
+description: 'Una action de ejemplo reutilizable'
+runs:
+  using: 'node16'
+  main: 'index.js'
+```
+
+O para una action basada en shell script:
+
+```yaml
+name: 'Mi Action Bash'
+description: 'Action que ejecuta un script bash'
+runs:
+  using: 'composite'
+  steps:
+    - run: bash script.sh
+```
+
+---
+
+**Resumen:**  
+- Usa la carpeta `actions/` o `action/`.
+- Cada action en su propia subcarpeta.
+- Define la action en `action.yml`.
+- Incluye los scripts necesarios en la misma carpeta.
+
+¿Quieres un ejemplo completo de una action reutilizable con script?
+
+cinthiapiera: si una donde me de directivas como shell, y paa un entorno de desarrollo de un proyecto
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un **ejemplo de action reutilizable** usando shell script (`composite run steps`) y pensada para preparar un entorno de desarrollo de un proyecto.
+
+### 1. Estructura recomendada
+
+```
+actions/
+  setup-dev-env/
+    action.yml
+    setup.sh
+```
+
+---
+
+### 2. Ejemplo de `setup.sh`
+
+```bash
+#!/bin/bash
+echo "Actualizando paquetes..."
+sudo apt-get update
+
+echo "Instalando Node.js y npm..."
+sudo apt-get install -y nodejs npm
+
+echo "Instalando dependencias del proyecto..."
+npm install
+
+echo "Entorno de desarrollo listo."
+```
+
+---
+
+### 3. Ejemplo de `action.yml`
+
+```yaml
+name: 'Setup Dev Environment'
+description: 'Prepara el entorno de desarrollo para el proyecto'
+runs:
+  using: 'composite'
+  steps:
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+
+    - name: Ejecutar script de setup
+      run: ${{ github.action_path }}/setup.sh
+      shell: bash
+```
+
+---
+
+### 4. Cómo usar esta action en tu workflow
+
+```yaml
+name: Test
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup entorno de desarrollo
+        uses: ./actions/setup-dev-env
+
+      - name: Verificar Node.js
+        run: node -v
+```
+
+---
+
+**Notas:**
+- Cambia los comandos de `setup.sh` según las necesidades de tu proyecto.
+- El campo `shell: bash` asegura que los comandos se ejecuten en bash.
+- La action se usa localmente con `uses: ./actions/setup-dev-env`.
+
+¿Quieres que adapte el ejemplo a otro lenguaje o gestor de paquetes?
+
+cinthiapiera: tambien me dicen algo de parametros, usando  directivas, inputs, message
+
+GitHub Copilot: ¡Exacto! Cuando creas una **action reutilizable**, puedes definir **parámetros** (inputs) en el archivo `action.yml` para que quien use la action pueda personalizar su comportamiento, por ejemplo, pasando un mensaje.
+
+Aquí tienes un ejemplo completo:
+
+---
+
+### 1. Estructura de la action
+
+```
+actions/
+  setup-dev-env/
+    action.yml
+    setup.sh
+```
+
+---
+
+### 2. Ejemplo de `action.yml` con inputs
+
+```yaml
+name: 'Setup Dev Environment'
+description: 'Prepara el entorno de desarrollo para el proyecto'
+inputs:
+  message:
+    description: 'Mensaje personalizado'
+    required: false
+    default: 'Entorno listo'
+runs:
+  using: 'composite'
+  steps:
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+
+    - name: Ejecutar script de setup
+      run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+      shell: bash
+```
+
+---
+
+### 3. Ejemplo de `setup.sh` usando el parámetro
+
+```bash
+#!/bin/bash
+echo "Actualizando paquetes..."
+sudo apt-get update
+
+echo "Instalando Node.js y npm..."
+sudo apt-get install -y nodejs npm
+
+echo "Instalando dependencias del proyecto..."
+npm install
+
+echo "$1"
+```
+
+---
+
+### 4. Cómo usar la action y pasar el parámetro
+
+```yaml
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup entorno de desarrollo
+        uses: ./actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+
+      - name: Verificar Node.js
+        run: node -v
+```
+
+---
+
+**Resumen:**  
+- Usas la directiva `inputs` en `action.yml` para definir parámetros.
+- En el workflow, pasas el valor con `with:`.
+- El script recibe el mensaje como argumento y lo muestra.
+
+¿Quieres que adapte el ejemplo a otro tipo de parámetro o acción?
+
+cinthiapiera: verifica si esta bien los archivos 
+
+GitHub Copilot: ¡Claro! Aquí tienes la **verificación** de cómo deben estar tus archivos para una action reutilizable con parámetros (inputs):
+
+---
+
+### 1. Estructura de carpetas y archivos
+
+```
+actions/
+  setup-dev-env/
+    action.yml
+    setup.sh
+.github/
+  workflows/
+    test_2.yml
+```
+
+---
+
+### 2. Contenido de `actions/setup-dev-env/action.yml`
+
+````yaml
+name: 'Setup Dev Environment'
+description: 'Prepara el entorno de desarrollo para el proyecto'
+inputs:
+  message:
+    description: 'Mensaje personalizado'
+    required: false
+    default: 'Entorno listo'
+runs:
+  using: 'composite'
+  steps:
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+
+    - name: Ejecutar script de setup
+      run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+      shell: bash
+````
+
+---
+
+### 3. Contenido de `actions/setup-dev-env/setup.sh`
+
+```bash
+#!/bin/bash
+echo "Actualizando paquetes..."
+sudo apt-get update
+
+echo "Instalando Node.js y npm..."
+sudo apt-get install -y nodejs npm
+
+echo "Instalando dependencias del proyecto..."
+npm install
+
+echo "$1"
+```
+
+---
+
+### 4. Contenido de test_2.yml
+
+````yaml
+name: Test
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup entorno de desarrollo
+        uses: ./actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+
+      - name: Verificar Node.js
+        run: node -v
+````
+
+---
+
+**Verificación:**  
+- La estructura y los archivos están correctos.
+- El parámetro `message` se pasa correctamente desde el workflow y es recibido por el script.
+- El script realiza las instalaciones y muestra el mensaje.
+
+¿Quieres que revise algún archivo específico o tienes dudas sobre algún detalle?
+
+cinthiapiera: en el ejemplo del profe estas action estan dentro del .github a la altura de workflow
+
+GitHub Copilot: ¡Muy buena observación!  
+También es **válido** (y común en proyectos pequeños o para pruebas) colocar tus actions reutilizables dentro de la carpeta actions en vez de en la raíz del repositorio.
+
+### Ejemplo de estructura alternativa
+
+```
+.github/
+  workflows/
+    test_2.yml
+  actions/
+    setup-dev-env/
+      action.yml
+      setup.sh
+```
+
+En este caso, la referencia en tu workflow sería:
+
+```yaml
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+```
+
+**Ambas formas son correctas**.  
+- Usar actions ayuda a mantener todo lo relacionado con GitHub (workflows y actions) en un solo lugar.
+- La referencia en `uses:` debe ser la ruta relativa desde la raíz del repositorio.
+
+---
+
+**Resumen:**  
+- Puedes poner tus actions en `actions/` (raíz) o en actions.
+- Solo ajusta la ruta en `uses:` según dónde esté tu action.
+
+¿Quieres que adapte el ejemplo a esta estructura?
+
+cinthiapiera: me sale error o precaucion en el terminal
+
+GitHub Copilot: ¡Entiendo! Si te aparece un **error o advertencia** en el terminal o en las Actions de GitHub, aquí tienes algunos puntos clave para revisar:
+
+---
+
+### 1. **Rutas**
+- Asegúrate de que la ruta en `uses:` coincida exactamente con la ubicación de tu action.
+  - Si está en setup-dev-env, debe ser:
+    ```yaml
+    uses: ./.github/actions/setup-dev-env
+    ```
+
+### 2. **Permisos del script**
+- El script `setup.sh` debe tener permisos de ejecución.  
+  Esto se resuelve con el paso:
+    ```yaml
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+    ```
+
+### 3. **Sintaxis del YAML**
+- Verifica que la indentación y los nombres de los archivos sean correctos.
+- No debe haber caracteres extraños ni errores de formato.
+
+### 4. **Ubicación de los archivos**
+- `action.yml` y `setup.sh` deben estar en la misma carpeta.
+- La carpeta de la action debe estar dentro de actions si así la refieres.
+
+### 5. **Logs de GitHub Actions**
+- Revisa el detalle del error en la pestaña **Actions** de GitHub.  
+  Ahí verás el mensaje exacto y en qué paso ocurre.
+
+---
+
+Si puedes, **comparte el mensaje de error** o advertencia que ves, así podré ayudarte a solucionarlo de forma más precisa.
+
+cinthiapiera: verifica todo
+
+GitHub Copilot: ¡Vamos a verificar todo el flujo y los posibles errores!
+
+---
+
+## 1. **Ubicación y referencia de la action**
+
+- Tu workflow está en:  
+  test_2.yml
+- Tu action personalizada debe estar en:  
+  setup-dev-env
+  - Dentro de esa carpeta deben estar:  
+    - `action.yml`
+    - `setup.sh`
+
+La referencia en tu workflow:
+```yaml
+uses: ./.github/actions/setup-dev-env
+```
+**Esto es correcto** si la estructura de carpetas es la mencionada.
+
+---
+
+## 2. **Contenido de `action.yml`**
+
+Debe tener al menos:
+
+```yaml
+name: 'Setup Dev Environment'
+description: 'Prepara el entorno de desarrollo para el proyecto'
+inputs:
+  message:
+    description: 'Mensaje personalizado'
+    required: false
+    default: 'Entorno listo'
+runs:
+  using: 'composite'
+  steps:
+    - name: Dar permisos de ejecución al script
+      run: chmod +x ${{ github.action_path }}/setup.sh
+      shell: bash
+
+    - name: Ejecutar script de setup
+      run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+      shell: bash
+```
+
+---
+
+## 3. **Contenido de `setup.sh`**
+
+```bash
+#!/bin/bash
+echo "Actualizando paquetes..."
+sudo apt-get update
+
+echo "Instalando Node.js y npm..."
+sudo apt-get install -y nodejs npm
+
+echo "Instalando dependencias del proyecto..."
+npm install
+
+echo "$1"
+```
+
+---
+
+## 4. **Workflow (test_2.yml)**
+
+Tu workflow está bien, solo asegúrate de la indentación y que no haya espacios extra.  
+Debe verse así:
+
+```yaml
+name: Test
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+
+      - name: Verificar Node
+        run: node -v
+```
+
+---
+
+## 5. **Errores comunes a revisar**
+
+- **Ruta incorrecta:**  
+  Si la carpeta o archivo no existe, dará error de "no se encuentra la action".
+- **Permisos:**  
+  El paso de `chmod` en la action debe ejecutarse antes de llamar al script.
+- **Sintaxis YAML:**  
+  Verifica que la indentación sea correcta y no haya caracteres extraños.
+- **Dependencias:**  
+  Si el script intenta instalar algo y falla (por ejemplo, falta de permisos o error en el comando), revisa los logs de Actions.
+
+---
+
+## 6. **¿Qué hacer si sigue el error?**
+
+- Revisa el log de Actions en GitHub para ver el mensaje exacto.
+- Asegúrate de que los archivos estén en la ubicación correcta.
+- Si puedes, comparte el mensaje de error para ayudarte mejor.
+
+---
+
+**Conclusión:**  
+Tu configuración es correcta si la estructura y los archivos están como se indica arriba.  
+Si hay error, probablemente sea por ruta, permisos o sintaxis.  
+¡Revisa los puntos anteriores y si el error persiste, comparte el mensaje exacto para una ayuda más precisa!
+
+cinthiapiera: salio genial, puedes realizar el reusmen 
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes el **resumen** de esta sección sobre actions reutilizables y parámetros:
+
+---
+
+## Resumen: Actions reutilizables con parámetros en GitHub Actions
+
+1. **Estructura recomendada:**
+   - Las actions reutilizables pueden estar en `.github/actions/mi-action/` dentro del repositorio.
+   - Cada action tiene su propio `action.yml` y los scripts necesarios (por ejemplo, `setup.sh`).
+
+2. **Definición de parámetros (inputs):**
+   - En `action.yml` defines los parámetros bajo la clave `inputs`.
+   - Puedes establecer valores por defecto y descripciones.
+
+3. **Uso de scripts y directivas:**
+   - El action puede ejecutar scripts (como `setup.sh`) y pasarle los parámetros recibidos.
+   - Se recomienda dar permisos de ejecución al script dentro de la action.
+
+4. **Ejemplo de uso en workflow:**
+   - En el workflow (test_2.yml), usas la action con la ruta relativa y pasas los parámetros usando `with`.
+
+5. **Ventajas:**
+   - Permite centralizar y reutilizar lógica de configuración o instalación.
+   - Facilita la personalización mediante parámetros.
+   - Mantiene los workflows limpios y organizados.
+
+---
+
+**¡Con esto puedes crear y reutilizar tus propias actions personalizadas en cualquier proyecto GitHub!**
+
+cinthiapiera: vamos con un ejemplo de variables y secretos
+
+GitHub Copilot: ¡Perfecto! Aquí tienes un **ejemplo práctico** de cómo usar **variables** y **secretos** en un workflow de GitHub Actions:
+
+---
+
+### 1. **Variables de entorno**
+
+Puedes definir variables de entorno directamente en el workflow:
+
+```yaml
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    env:
+      MI_VARIABLE: "Valor visible"
+    steps:
+      - name: Mostrar variable
+        run: echo "La variable es $MI_VARIABLE"
+```
+
+---
+
+### 2. **Secretos**
+
+Los secretos se configuran en GitHub (Settings > Secrets and variables > Actions) y se usan así:
+
+```yaml
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar secreto
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+```
+
+> **Nota:** Los secretos nunca se muestran en texto plano en los logs.
+
+---
+
+### 3. **Ejemplo combinado**
+
+```yaml
+name: Ejemplo Variables y Secretos
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    env:
+      MI_VARIABLE: "Valor visible"
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Mostrar variable de entorno
+        run: echo "La variable es $MI_VARIABLE"
+
+      - name: Mostrar secreto (no se verá el valor real en logs)
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+```
+
+---
+
+**Recuerda:**  
+- Define los secretos en la configuración del repositorio antes de usarlos.
+- Usa variables para valores no sensibles y secretos para información confidencial (tokens, contraseñas, etc.).
+
+¿Quieres un ejemplo usando variables/secrets en un script o en una action personalizada?
+
+cinthiapiera: serai bueno seguir com oen los ejemplos anteriores com opractica
+
+GitHub Copilot: ¡Excelente idea! Aquí tienes un **ejemplo práctico** para agregar al final de tu workflow, siguiendo el estilo de tus ejemplos anteriores, usando **variables de entorno** y **secretos**:
+
+````yaml
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+
+    env:
+      MI_VARIABLE: "Valor visible desde YAML"
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+
+      - name: Verificar Node
+        run: node -v
+
+      - name: Mostrar variable de entorno
+        run: echo "La variable es $MI_VARIABLE"
+
+      - name: Mostrar secreto (no se verá el valor real en logs)
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+````
+
+**Recuerda:**  
+- Antes de ejecutar este workflow, debes crear el secreto `MI_SECRETO` en la configuración de tu repositorio en GitHub (Settings > Secrets and variables > Actions > New repository secret).
+
+¿Quieres que el ejemplo use la variable o el secreto dentro de tu script personalizado también?
+
+cinthiapiera: me piden que cree un nuevo workflow y que pueda ver tanto en jobs y en steps las variable sy los secretos
+
+GitHub Copilot: ¡Perfecto! Aquí tienes un ejemplo de **nuevo workflow** donde puedes ver cómo definir y usar **variables** y **secretos** tanto a nivel de `jobs` como de `steps`:
+
+````yaml
+name: Ejemplo Variables y Secretos
+
+on: [push]
+
+jobs:
+  mostrar-vars:
+    runs-on: ubuntu-latest
+
+    # Variables de entorno a nivel de job
+    env:
+      VAR_JOB: "Variable definida en el job"
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # Variable de entorno a nivel de step
+      - name: Variable de entorno en step
+        env:
+          VAR_STEP: "Variable definida en el step"
+        run: |
+          echo "VAR_JOB (job): $VAR_JOB"
+          echo "VAR_STEP (step): $VAR_STEP"
+
+      - name: Mostrar secreto (no se verá el valor real en logs)
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+
+      - name: Usar secreto como variable de entorno en step
+        env:
+          SECRETO_STEP: ${{ secrets.MI_SECRETO }}
+        run: echo "El secreto como variable de entorno es $SECRETO_STEP"
+````
+
+**Recuerda:**  
+- Debes crear el secreto `MI_SECRETO` en la configuración de tu repositorio (Settings > Secrets and variables > Actions > New repository secret).
+- Así verás en los logs cómo se usan variables y secretos tanto en el job como en los steps.
+
+¿Quieres agregar algún uso de variables o secretos dentro de un script también?
+
+cinthiapiera: estamos ahora em la estrategia de matriz, donde el jobs puede tener varias versiones de alguna dependecia
+
+GitHub Copilot: ¡Exacto! La **estrategia de matriz** (`matrix`) en GitHub Actions te permite ejecutar un job varias veces con diferentes valores, por ejemplo, probando varias versiones de Node.js, Python, etc.
+
+Aquí tienes un ejemplo práctico para tu flujo, usando una matriz para probar varias versiones de Node.js:
+
+````yaml
+name: Test Matrix
+
+on: [push]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Verificar Node
+        run: node -v
+
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito para Node ${{ matrix.node-version }}!"
+````
+
+**¿Qué hace esto?**
+- Ejecuta el job `test-build` tres veces: una con Node.js 16, otra con 18 y otra con 20.
+- En cada ejecución, instala la versión correspondiente y ejecuta los pasos definidos.
+
+Puedes adaptar la matriz para otros lenguajes o dependencias cambiando el nombre y los valores.
+
+¿Quieres un ejemplo con otra tecnología o con más de una variable en la matriz?
+
+cinthiapiera: puedes colocar todo lo conversado en un documento markdowny no perder nada asi repaso todo lo aprendido
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un **documento Markdown** que resume todo lo que has practicado y aprendido sobre GitHub Actions, YAML, variables, secretos, actions reutilizables y matrices:
+
+````markdown
+# Resumen de Prácticas con GitHub Actions
+
+## 1. Fundamentos de YAML y GitHub Actions
+
+- Los archivos YAML permiten definir workflows de automatización en `.github/workflows/`.
+- Ejemplo básico de workflow:
+
+    ```yaml
+    name: Hola Mundo
+
+    on: 
+      push:
+
+    jobs:
+      saludo:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Mostrar mensaje
+            run: echo "Hola Mundo"
+    ```
+
+## 2. Subir archivos y ramas en Git
+
+Pasos para subir un workflow a GitHub:
+
+```bash
+git init
+git add -A
+git commit -m "Agrega workflow Hola Mundo"
+git branch -m master main  # Opcional, para usar 'main' como rama principal
+git remote add origin https://github.com/usuario/repositorio.git
+git push -u origin main
+```
+
+## 3. Eventos en GitHub Actions
+
+- Puedes disparar workflows con diferentes eventos:
+
+    ```yaml
+    on: 
+      push:
+        branches:
+          - main
+      pull_request:
+        branches:
+          - main
+    ```
+
+- Esto permite ejecutar el workflow solo en `push` o `pull_request` a la rama `main`.
+
+## 4. Uso de Actions del Marketplace
+
+- Ejemplo usando `actions/checkout` para acceder al código fuente:
+
+    ```yaml
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+    ```
+
+## 5. Instalación de paquetes con scripts
+
+- Puedes crear un archivo `script.sh` para instalar paquetes y ejecutarlo desde el workflow:
+
+    ```bash
+    # script.sh
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y curl git
+    ```
+
+    ```yaml
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar script de instalación
+        run: bash script.sh
+    ```
+
+## 6. Actions reutilizables
+
+- Estructura recomendada:
+
+    ```
+    .github/
+      actions/
+        setup-dev-env/
+          action.yml
+          setup.sh
+    ```
+
+- Ejemplo de `action.yml` con parámetros:
+
+    ```yaml
+    name: 'Setup Dev Environment'
+    description: 'Prepara el entorno de desarrollo para el proyecto'
+    inputs:
+      message:
+        description: 'Mensaje personalizado'
+        required: false
+        default: 'Entorno listo'
+    runs:
+      using: 'composite'
+      steps:
+        - name: Dar permisos de ejecución al script
+          run: chmod +x ${{ github.action_path }}/setup.sh
+          shell: bash
+
+        - name: Ejecutar script de setup
+          run: ${{ github.action_path }}/setup.sh "${{ inputs.message }}"
+          shell: bash
+    ```
+
+- Ejemplo de `setup.sh`:
+
+    ```bash
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y nodejs npm
+    npm install
+    echo "$1"
+    ```
+
+- Uso en el workflow:
+
+    ```yaml
+    steps:
+      - name: Setup entorno de desarrollo
+        uses: ./.github/actions/setup-dev-env
+        with:
+          message: "¡Entorno de desarrollo preparado con éxito!"
+    ```
+
+## 7. Variables y secretos
+
+- Variables de entorno a nivel de job y step:
+
+    ```yaml
+    jobs:
+      test-build:
+        runs-on: ubuntu-latest
+        env:
+          MI_VARIABLE: "Valor visible desde YAML"
+        steps:
+          - name: Mostrar variable de entorno
+            run: echo "La variable es $MI_VARIABLE"
+    ```
+
+- Uso de secretos (deben crearse en GitHub):
+
+    ```yaml
+    steps:
+      - name: Mostrar secreto
+        run: echo "El secreto es ${{ secrets.MI_SECRETO }}"
+    ```
+
+- Variables y secretos en steps:
+
+    ```yaml
+    - name: Usar secreto como variable de entorno en step
+      env:
+        SECRETO_STEP: ${{ secrets.MI_SECRETO }}
+      run: echo "El secreto como variable de entorno es $SECRETO_STEP"
+    ```
+
+## 8. Estrategia de matriz (matrix)
+
+- Permite ejecutar el mismo job con diferentes versiones de una dependencia:
+
+    ```yaml
+    jobs:
+      test-build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [16, 18, 20]
+        steps:
+          - name: Setup Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v4
+            with:
+              node-version: ${{ matrix.node-version }}
+          - name: Verificar Node
+            run: node -v
+    ```
+
+---
+
+**¡Con este resumen tienes una guía completa para repasar y practicar todo lo aprendido sobre GitHub Actions y YAML!**
+````
+
+cinthiapiera: si pero no estan algunos conceptos que me explicaste y son buenos para colocarlos en card luego
+
+GitHub Copilot: ¡Por supuesto! Aquí tienes un resumen extendido, incluyendo **conceptos clave** y explicaciones que puedes usar para crear tarjetas de estudio (cards):
+
+````markdown
+# Resumen Completo de GitHub Actions y YAML
+
+---
+
+## ¿Qué es GitHub Actions?
+- Es una herramienta de automatización integrada en GitHub.
+- Permite ejecutar tareas automáticamente en respuesta a eventos como push, pull request, etc.
+
+---
+
+## ¿Qué es un archivo YAML en este contexto?
+- Es un archivo de configuración que define los workflows de automatización.
+- Se ubica en `.github/workflows/` y usa sintaxis clara de clave-valor.
+
+---
+
+## Estructura básica de un workflow
+
+```yaml
+name: Nombre del workflow
+
+on: [evento]  # Ejemplo: push, pull_request
+
+jobs:
+  nombre_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descripción del paso
+        run: comando_a_ejecutar
+```
+
+---
+
+## ¿Qué es un job?
+- Es una unidad de trabajo dentro del workflow.
+- Cada job puede tener varios pasos (steps).
+- Los jobs pueden ejecutarse en paralelo o en secuencia usando `needs`.
+
+---
+
+## ¿Qué es un step?
+- Es una acción individual dentro de un job.
+- Puede ser un comando (`run`) o una action (`uses`).
+
+---
+
+## ¿Qué es una action?
+- Es una tarea reutilizable, definida por la comunidad o personalizada.
+- Se puede usar desde el Marketplace o crear localmente.
+
+---
+
+## ¿Qué es el Marketplace?
+- Es una tienda de acciones listas para usar, como `actions/checkout` o `actions/setup-node`.
+
+---
+
+## ¿Qué es un trigger o evento?
+- Es lo que dispara la ejecución del workflow.
+- Ejemplos: `push`, `pull_request`, `schedule`, etc.
+
+---
+
+## ¿Qué es una matriz (matrix)?
+- Permite ejecutar el mismo job con diferentes valores (por ejemplo, varias versiones de Node.js).
+- Útil para pruebas multiplataforma o multiversión.
+
+---
+
+## ¿Qué es un secreto?
+- Es un valor sensible (token, contraseña) almacenado de forma segura en GitHub.
+- Se accede en el workflow como `${{ secrets.NOMBRE_SECRETO }}`.
+
+---
+
+## ¿Qué es una variable de entorno?
+- Es un valor que puedes definir a nivel de job, step o workflow.
+- Se accede como `$NOMBRE_VARIABLE` en bash o `${{ env.NOMBRE_VARIABLE }}` en YAML.
+
+---
+
+## ¿Qué es una action reutilizable?
+- Es una action definida en tu propio repositorio, que puedes usar en varios workflows.
+- Se recomienda ubicarlas en `.github/actions/` y referenciarlas con `uses: ./.github/actions/mi-action`.
+
+---
+
+## ¿Qué es un input en una action?
+- Es un parámetro que puedes pasar a una action reutilizable para personalizar su comportamiento.
+- Se define en `action.yml` bajo la clave `inputs`.
+
+---
+
+## ¿Qué es needs?
+- Es una directiva para indicar dependencias entre jobs.
+- Permite ejecutar jobs en secuencia.
+
+---
+
+## ¿Qué es el runner?
+- Es el entorno donde se ejecutan los jobs (por ejemplo, `ubuntu-latest`).
+
+---
+
+## ¿Qué es el paso checkout?
+- Es el action `actions/checkout` que descarga el código fuente del repositorio en el runner.
+
+---
+
+## ¿Qué es un script de instalación?
+- Es un archivo (por ejemplo, `script.sh`) que contiene comandos para instalar dependencias o preparar el entorno.
+
+---
+
+## ¿Qué es el archivo action.yml?
+- Es el archivo de definición de una action reutilizable.
+- Incluye nombre, descripción, entradas (`inputs`), y los pasos a ejecutar (`runs`).
+
+---
+
+**¡Con estos conceptos puedes crear tarjetas de estudio y repasar todos los fundamentos y buenas prácticas de GitHub Actions y YAML!**
+````

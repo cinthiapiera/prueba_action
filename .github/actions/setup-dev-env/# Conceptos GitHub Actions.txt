@@ -1,0 +1,121 @@
+# Resumen Completo de GitHub Actions y YAML
+
+---
+
+## ¿Qué es GitHub Actions?
+- Es una herramienta de automatización integrada en GitHub.
+- Permite ejecutar tareas automáticamente en respuesta a eventos como push, pull request, etc.
+
+---
+
+## ¿Qué es un archivo YAML en este contexto?
+- Es un archivo de configuración que define los workflows de automatización.
+- Se ubica en `.github/workflows/` y usa sintaxis clara de clave-valor.
+
+---
+
+## Estructura básica de un workflow
+
+```yaml
+name: Nombre del workflow
+
+on: [evento]  # Ejemplo: push, pull_request
+
+jobs:
+  nombre_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descripción del paso
+        run: comando_a_ejecutar
+```
+
+---
+
+## ¿Qué es un job?
+- Es una unidad de trabajo dentro del workflow.
+- Cada job puede tener varios pasos (steps).
+- Los jobs pueden ejecutarse en paralelo o en secuencia usando `needs`.
+
+---
+
+## ¿Qué es un step?
+- Es una acción individual dentro de un job.
+- Puede ser un comando (`run`) o una action (`uses`).
+
+---
+
+## ¿Qué es una action?
+- Es una tarea reutilizable, definida por la comunidad o personalizada.
+- Se puede usar desde el Marketplace o crear localmente.
+
+---
+
+## ¿Qué es el Marketplace?
+- Es una tienda de acciones listas para usar, como `actions/checkout` o `actions/setup-node`.
+
+---
+
+## ¿Qué es un trigger o evento?
+- Es lo que dispara la ejecución del workflow.
+- Ejemplos: `push`, `pull_request`, `schedule`, etc.
+
+---
+
+## ¿Qué es una matriz (matrix)?
+- Permite ejecutar el mismo job con diferentes valores (por ejemplo, varias versiones de Node.js).
+- Útil para pruebas multiplataforma o multiversión.
+
+---
+
+## ¿Qué es un secreto?
+- Es un valor sensible (token, contraseña) almacenado de forma segura en GitHub.
+- Se accede en el workflow como `${{ secrets.NOMBRE_SECRETO }}`.
+
+---
+
+## ¿Qué es una variable de entorno?
+- Es un valor que puedes definir a nivel de job, step o workflow.
+- Se accede como `$NOMBRE_VARIABLE` en bash o `${{ env.NOMBRE_VARIABLE }}` en YAML.
+
+---
+
+## ¿Qué es una action reutilizable?
+- Es una action definida en tu propio repositorio, que puedes usar en varios workflows.
+- Se recomienda ubicarlas en `.github/actions/` y referenciarlas con `uses: ./.github/actions/mi-action`.
+
+---
+
+## ¿Qué es un input en una action?
+- Es un parámetro que puedes pasar a una action reutilizable para personalizar su comportamiento.
+- Se define en `action.yml` bajo la clave `inputs`.
+
+---
+
+## ¿Qué es needs?
+- Es una directiva para indicar dependencias entre jobs.
+- Permite ejecutar jobs en secuencia.
+
+---
+
+## ¿Qué es el runner?
+- Es el entorno donde se ejecutan los jobs (por ejemplo, `ubuntu-latest`).
+
+---
+
+## ¿Qué es el paso checkout?
+- Es el action `actions/checkout` que descarga el código fuente del repositorio en el runner.
+
+---
+
+## ¿Qué es un script de instalación?
+- Es un archivo (por ejemplo, `script.sh`) que contiene comandos para instalar dependencias o preparar el entorno.
+
+---
+
+## ¿Qué es el archivo action.yml?
+- Es el archivo de definición de una action reutilizable.
+- Incluye nombre, descripción, entradas (`inputs`), y los pasos a ejecutar (`runs`).
+
+---
+
+**¡Con estos conceptos puedes crear tarjetas de estudio y repasar todos los fundamentos y buenas prácticas de GitHub Actions y YAML!**
