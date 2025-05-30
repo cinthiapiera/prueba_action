@@ -1,0 +1,14 @@
+name: "Avazando a Producción"
+
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  deploy-prueba:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Despliegue a producción iniciado"
+      - run: echo "Correr migraciones"
+      - run: echo "Generar assets"
+      - run: echo "Despliegue a producción completado"
