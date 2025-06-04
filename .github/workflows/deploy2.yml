@@ -11,7 +11,7 @@ jobs:
         run: echo "Hola Mundo"
 
   second-jobs:
-  if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
     needs: first_jobs
     runs-on: ubuntu-latest
 
