@@ -11,9 +11,10 @@ jobs:
         run: echo "Hola Mundo"
 
   second-jobs:
+  if: ${{ github.event_name == 'push' }}
     needs: first_jobs
     runs-on: ubuntu-latest
 
     steps:
       - name: Hola Mundo
-        run: echo "Hola Mundo 2"
+        run: echo "Este workflow fue ejecutado en la rama ${{ github.ref }}"
